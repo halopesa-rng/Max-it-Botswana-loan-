@@ -1,1 +1,0 @@
-{"name":"maxit-botswana-independent-demo","version":"1.1.0","private":true,"description":"Independent local simulation of a two-step application review UI","main":"server.js","scripts":{"start":"node server.js"},"engines":{"node":">=18"},"dependencies":{"express":"^4.21.2"}}
