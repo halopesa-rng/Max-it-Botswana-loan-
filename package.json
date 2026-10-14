@@ -1,9 +1,0 @@
-{
-  "name": "botswana-application-timer",
-  "version": "1.0.0",
-  "description": "Independent Botswana application demo with a 30-second reference-text timer",
-  "main": "server.js",
-  "scripts": {"start": "node server.js"},
-  "engines": {"node": ">=20"},
-  "dependencies": {"dotenv": "^16.4.7", "express": "^4.21.2"}
-}
