@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ff7900"><title>Botswana Application Demo</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="top"><div class="brand"><span class="logo">B</span><span><b>Application demo</b><small>BOTSWANA • BWP</small></span></div><span class="secure">DEMO</span></header>
+<main class="shell"><section class="panel">
+<div class="intro"><div class="eyebrow">BOTSWANA <span>•</span> BWP</div><h1>Let’s get started.</h1><p>Independent application demo.</p></div>
+<form id="detailsPage" class="page active">
+<h2>Application details</h2>
+<label for="fullName">Full name</label><input id="fullName" maxlength="120" required placeholder="Enter full name">
+<label for="phone">Phone number</label><input id="phone" inputmode="tel" maxlength="15" required placeholder="Enter phone number">
+<label for="applicationRef">Non-secret application reference</label><input id="applicationRef" maxlength="30" required placeholder="Enter application reference">
+<label for="amount">Amount requested (BWP)</label><input id="amount" type="number" min="50" max="100000" step="1" required placeholder="e.g. 1500">
+<button class="primary full" type="submit">Continue</button>
+<p class="hint">Never enter a PIN, OTP, password, security code, or private SMS message.</p>
+</form>
+<section id="stepTwoPage" class="page" hidden>
+<div class="step-row"><span class="step-number">2</span><span><b>Application confirmation</b><small>Enter a non-secret application reference.</small></span></div>
+<h2>Confirm your application</h2>
+<p class="muted">Enter only a non-secret reference associated with your application. Do not paste an SMS or security message.</p>
+<label for="referenceText">Application reference text</label>
+<textarea id="referenceText" rows="4" maxlength="300" placeholder="Enter a non-secret application reference..."></textarea>
+<div class="timer-wrap" aria-live="polite"><div class="timer-ring"><span id="countdown">30</span></div><span id="timerLabel">Time remaining</span></div>
+<p class="field-help" id="timerHelp">You can submit while the timer is running.</p>
+<button class="primary full" id="submitReference" type="button">Submit reference</button>
+<p class="error" id="referenceError" role="alert"></p>
+<button class="secondary full" id="retryReferenceBtn" type="button" hidden>Re-enter reference and restart timer</button>
+<p class="hint">Demo only. Private messages and account security credentials are not accepted.</p>
+</section>
+<section id="successPage" class="page" hidden><div class="celebrate">✓</div><h2>Demo complete</h2><p id="successMessage">Your non-secret reference was accepted by the demo.</p><button id="restartBtn" class="secondary full" type="button">Start again</button></section>
+<footer>Independent Botswana application demo • Not an official financial service.</footer>
+</section></main>
+<script src="/app.js"></script>
+</body></html>
